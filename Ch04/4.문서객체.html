@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.문서객체</title> <!-- 여기서 문서가 의미하는 건 html -->
+    <!-- 
+        날짜 : 2023/07/19
+        이름 : 박한산
+        내용 : 자바스크립트 문서객체 실습하기
+    -->
+    <style>
+        .box {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+
+        .red {background-color: red;}
+        .blue {background-color: blue;}
+        .green {background-color: green;}
+
+    </style>
+
+</head>
+<body>
+    <h3>4.문서객체</h3>
+
+    <ul>
+        <li id="seoul">
+            <span>서울</span>
+            <ol>
+                <li><i>명동</i></li>
+                <li><i>종로</i></li>
+                <li><i>홍대</i></li>
+                <li><i>이태원</i></li>
+            </ol>
+        </li>
+        <li>대전</li>
+        <li id="daegu">대구</li>
+        <li>
+            <span>부산</span>
+            <ol>
+                <li class="busan">서면</li>
+                <li class="busan">경대</li>
+                <li class="busan">해운대</li>
+            </ol>
+        </li>
+        <li>광주</li>
+    </ul>
+
+    <div class="box1">box1</div>
+    <div class="box2">box2</div>
+
+    <ul id="korea">
+        <li>서울</li>
+        <li>대전</li>
+        <li>대구</li>
+        <li>부산</li>
+        <li>광주</li>
+    </ul>
+
+    <img src="" alt=""> <!-- alt는 설명-->
+    <img src="" alt="">
+
+    <p class="content"></p>
+    <p class="content"></p>
+
+    <div class="box">box1</div>
+    <div class="box green">box2</div>
+    <div class="box">box3</div>
+
+
+    <h4>문서객체 선택</h4>
+    <script>
+        const h3 = document.querySelector('h3'); // h3 객체는 위에 h3태그 4.문서객체 가리킴 
+        h3.style.color = 'gray'; //css는 정적, 스크립트는 동적
+
+        const seoul = document.querySelector('#seoul > span');
+        seoul.style.color = 'red';
+
+        const daejeon = document.querySelector('ul > li:nth-child(2)') // 'korea' ul도 가르키지 않나??? 
+        daejeon.style.color = 'orange';
+
+        const busan = document.querySelector('ul > li:nth-child(4) > span')
+        busan.style.color = 'blue';
+
+        const cities = document.querySelectorAll('.busan'); // cities는 배열이 됨, 클래스 busan 여러개니까 selector로는 안됨.
+        cities[0].style.color = 'green';
+        cities[1].style.color = 'green';
+        cities[2].style.color = 'green';
+
+        const daegu = document.getElementById('daegu'); // id는 중복 안되므로 getelement!(s안붙음) 함수자체가 id 찾는 함수이므로 id 입력시 #넣으면 안됨
+        daegu.style.color = 'brown';
+
+        const seoulCities = document.getElementsByTagName('i'); // 중요! getElements는 배열로 나옴.
+
+        for(let city of seoulCities){
+            city.style.color = 'violet';
+        }
+
+        const busanCities = document.getElementsByClassName('busan'); // getelements는 선택자가 아니므로 값만 적으면 됨 .X
+        for(let city of busanCities){
+            city.style.background = 'yellow';
+        }
+    </script>
+
+    <h4>문서객체 조작</h4>
+    <script>
+        // 속성 조작
+        const imgs = document.querySelectorAll('img');
+        imgs[0].src = './images/flower1.jpg';
+        imgs[0].alt = '벚꽃';
+
+        imgs[1].src = './images/flower2.jpg';
+        imgs[1].alt = '코스모스';
+        
+        //선택자로 이렇게 하는 것보다 위에 처럼 SelectorAll로 배열로 하는게 더 간편
+        const img1 = document.querySelector('img:nth-of-type(1)');
+        img1.src = './images/flower1.jpg';
+        img1.alt = '벚꽃';
+
+        const img2 = document.querySelector('img:nth-of-type(2)');
+        img2.src = './images/flower2.jpg';
+        img2.alt = '코스모스';
+
+
+
+
+
+
+        // 스타일 조작
+        const box1 = document.querySelector('.box1');
+        box1.style.display = 'inline-block';
+        box1.style.width = '100px';
+        box1.style.height = '100px';
+        box1.style.border = '1px solid black';
+        box1.style.background = 'orange';
+
+        const box2 = document.getElementsByClassName('box2'); // 선택자 아니므로 .찍으면 안 됨 queryselector랑 구별!, 하나 선택하지만 배열로 리턴됨
+        box2[0].style.display = 'inline-block'; // 둘다 inline-block 해야 옆으로 온다. box2 안 해버리면 div는 기본형이 block 이므로 box2가 한 줄 혼자 차지한다
+        box2[0].style.width = '100px';
+        box2[0].style.height = '100px';
+        box2[0].style.border = '1px solid black';
+        box2[0].style.backgroundColor = 'green'; // camel 표기 안하고 backgroundcolor 하면 적용 X
+
+        // 내용 조작
+        const korea = document.querySelector('#korea'); // korea는 'ul 에 li가 밑에 있는 구조'를 갖는 객체
+
+        let text = korea.innerText; // 태그 내용의 텍스트 요소만 추출
+        let html = korea.innerHTML; // 태그 내용의 태그요소와 텍스트 요소 추출
+
+        console.log('text : ' + text);
+        console.log('html : ' + html);
+        document.write('text : ' + text + '<br>');
+        document.write('html : ' + html + '<br>');
+
+        const contents = document.querySelectorAll('.content');
+        contents[0].innerText = '<em>TEXT 내용입니다.</em>'; // 문자열 태그 포함 모두 텍스트 요소로 추가
+        contents[1].innerHTML = '<em>HTML 내용입니다.</em>'; // 문자열 태그는 태그요소로, 텍스트는 텍스트 요소로 추가
+
+        // 클래스 속성 조작
+        const boxes = document.getElementsByClassName('box');
+        boxes[0].classList.add('red'); // box class에 0번요소에 클래스 red를 추가한 것과 같은 효과-> css로 red 클래스 설정한 게 적용됨.
+        boxes[1].classList.remove('green'); // box class에 1번 요소에 클래스 green를 삭제하는 것 처럼
+        boxes[2].classList.toggle('blue'); //toggle은 추가 or 삭제, 즉 blue 클래스가 없으면 추가한 것과 같은 효과를 내고, 있으면 삭제한 것과 같은 효과
+
+
+
+
+
+    </script>
+</body>
+</html>
