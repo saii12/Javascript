@@ -27,6 +27,7 @@
 <body>
     <h3>4.문서객체</h3>
 
+    <h4>문서객체 선택</h4>
     <ul>
         <li id="seoul">
             <span>서울</span>
@@ -50,38 +51,18 @@
         <li>광주</li>
     </ul>
 
-    <div class="box1">box1</div>
-    <div class="box2">box2</div>
-
-    <ul id="korea">
-        <li>서울</li>
-        <li>대전</li>
-        <li>대구</li>
-        <li>부산</li>
-        <li>광주</li>
-    </ul>
-
-    <img src="" alt=""> <!-- alt는 설명-->
-    <img src="" alt="">
-
-    <p class="content"></p>
-    <p class="content"></p>
-
-    <div class="box">box1</div>
-    <div class="box green">box2</div>
-    <div class="box">box3</div>
-
-
-    <h4>문서객체 선택</h4>
     <script>
+        ///////////////////////////////////////
+        // 문서객체 선택
+        ///////////////////////////////////////
         const h3 = document.querySelector('h3'); // h3 객체는 위에 h3태그 4.문서객체 가리킴 
         h3.style.color = 'gray'; //css는 정적, 스크립트는 동적
 
         const seoul = document.querySelector('#seoul > span');
         seoul.style.color = 'red';
 
-        const daejeon = document.querySelector('ul > li:nth-child(2)') // 'korea' ul도 가르키지 않나??? 
-        daejeon.style.color = 'orange';
+        const daejeon = document.querySelector('ul > li:nth-child(2)') //'korea' ul도 가르키지 않나??? 맞음ㅇㅇ, 그래서 이것보다 선택자 명확하게 해줘야한대/ querySelector는 하나만 가리키는데, 해당하는 태그중에 젤 앞에꺼.  
+        daejeon.style.color = 'orange';        
 
         const busan = document.querySelector('ul > li:nth-child(4) > span')
         busan.style.color = 'blue';
@@ -107,7 +88,35 @@
     </script>
 
     <h4>문서객체 조작</h4>
+
+    <img src="" alt=""> <!-- alt는 설명-->
+    <img src="" alt="">
+
+    <hr> <!-- 가로선 -->
+
+    <div class="box1">box1</div>
+    <div class="box2">box2</div>
+
+    <ul id="korea">
+        <li>서울</li>
+        <li>대전11</li>
+        <li>대구</li>
+        <li>부산</li>
+        <li>광주</li>
+    </ul>
+
+    <p class="content"></p>
+    <p class="content"></p>
+
+    <div class="box">box1</div>
+    <div class="box green">box2</div>
+    <div class="box">box3</div>
+
     <script>
+        ///////////////////////////////////////
+        // 문서객체 조작
+        ///////////////////////////////////////
+
         // 속성 조작
         const imgs = document.querySelectorAll('img');
         imgs[0].src = './images/flower1.jpg';
@@ -124,11 +133,6 @@
         const img2 = document.querySelector('img:nth-of-type(2)');
         img2.src = './images/flower2.jpg';
         img2.alt = '코스모스';
-
-
-
-
-
 
         // 스타일 조작
         const box1 = document.querySelector('.box1');
@@ -165,11 +169,104 @@
         boxes[0].classList.add('red'); // box class에 0번요소에 클래스 red를 추가한 것과 같은 효과-> css로 red 클래스 설정한 게 적용됨.
         boxes[1].classList.remove('green'); // box class에 1번 요소에 클래스 green를 삭제하는 것 처럼
         boxes[2].classList.toggle('blue'); //toggle은 추가 or 삭제, 즉 blue 클래스가 없으면 추가한 것과 같은 효과를 내고, 있으면 삭제한 것과 같은 효과
+    
+    </script>
 
+    <h4>문서객체 추가/이동</h4>
+    <ul class="city">
+        <li><em>경기도</em><ol></ol></li>
+        <li><em>충청도</em><ol></ol></li>
+        <li><em>강원도</em><ol></ol></li>
+        <li>
+            <em>경상도</em>
+            <ol>
+                <li>창원</li>
+                <li>수원</li>
+                <li>목포</li>
+                <li>부여</li>
+                <li>원주</li>
+                <li>파주</li>
+            </ol>
+        </li>
+        <li><em>전라도</em><ol></ol></li>
+    </ul>
 
+    <script>
+        ///////////////////////////////////////
+        // 문서객체 추가/이동
+        ///////////////////////////////////////
 
+        const gyeonggi = document.querySelector('.city > li:nth-child(1) > ol');
+        const chungchung = document.querySelector('.city > li:nth-child(2) > ol');
+        const gangwon = document.querySelector('.city > li:nth-child(3) > ol');
+        const gyeongsang = document.querySelector('.city > li:nth-child(4) > ol');
+        const jeonlla = document.querySelector('.city > li:nth-child(5) > ol');
 
+        gyeonggi.insertAdjacentHTML('beforeend', '<li>평택</li>'); // 맨뒤에 평택 들어가고
+        gyeonggi.insertAdjacentHTML('beforeend', '<li>용인</li>'); // 맨뒤(평택보다 뒤) 용인이 들어가고
+        gyeonggi.insertAdjacentHTML('afterbegin', '<li>성남</li>'); // 맨앞에 성남 들어감
+        gyeonggi.insertAdjacentHTML('afterbegin', '<li>화성</li>'); // 맨앞(성남보다 앞) 화성 들어감
+
+        chungchung.insertAdjacentHTML('beforeend', '<li>단양</li>');
+        gangwon.insertAdjacentHTML('beforeend', '<li>춘천</li>');
+        jeonlla.insertAdjacentHTML('beforeend', '<li>담양</li>');
+
+        const nodes = gyeongsang.getElementsByTagName('li');
+        const suwon = nodes[1];
+        const mokpo = nodes[2];
+        const buyeo = nodes[3];
+        const wonju = nodes[4];
+        const pajoo = nodes[5];
+
+        gyeonggi.append(suwon); // append는 젤 뒤에 추가
+        gyeonggi.prepend(pajoo); // prepend는 젤 앞에 추가
+
+        jeonlla.append(mokpo);
+
+        chungchung.prepend(buyeo);
+
+        gangwon.append(wonju);
+    </script>
+
+    <h4>문서객체 생성/삭제</h4>
+    <section>
+        <h5>삭제할 예정입니다.</h5>
+    </section>
+
+    <script>
+        ///////////////////////////////////////
+        // 문서객체 생성/삭제
+        ///////////////////////////////////////
+
+        const section = document.getElementsByTagName('section')[0]; // 배열로 나오고 o번요소(배열에 원소 1개)
+        
+        const pNode = document.createElement('p'); //p태그생성
+        pNode.id = 'txt';
+        pNode.innerText = '동적으로 생성한 문단태그 p입니다.';
+        section.appendChild(pNode); //append도 가능, 같음
+
+        const imgNode1 = document.createElement('img'); //img태그생성
+        imgNode1.classList.add('img1'); // 클래스 설정
+        imgNode1.setAttribute('src', './images/flower1.jpg');
+        imgNode1.setAttribute('alt', '벚꽃');
+        section.appendChild(imgNode1);
+
+        const imgNode2 = document.createElement('img');
+        imgNode2.classList.add('img2');
+        imgNode2.setAttribute('src', './images/flower2.jpg');
+        imgNode2.setAttribute('alt', '코스모스');
+        section.insertBefore(imgNode2, imgNode1); //imgNode1 앞에 imgNode2 삽입
+
+        const h5 = document.querySelector('h5');
+        h5.remove();
 
     </script>
+
+
+
+
+
+
+
 </body>
 </html>
