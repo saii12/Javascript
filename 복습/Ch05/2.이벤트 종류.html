@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.이벤트종류</title>
+    <style>
+        html {
+            width: 100%;
+            height: 2000px;
+        }
+
+        #content1 > p:nth-child(2) {
+            position: fixed;
+            right: 40px;
+            top: 40px;
+        } 
+
+        .box { 
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+
+    </style>
+
+    <script>
+        console.log('here1...');
+
+        window.onload = function(){
+            console.log('here2...');
+
+            const btnTop = document.getElementById('btnTop');
+            btnTop.onclick = function(){
+                window.scrollTo(0, 0);
+            };
+
+            const box = document.getElementsByClassName('box');
+            box[0].addEventListener('click', function(){
+                this.style.background = 'red';
+            });
+            box[1].addEventListener('mousedown', function(){
+                this.style.background = 'blue';
+            });
+            box[2].addEventListener('mouseup', function(){
+                this.style.backgroundColor = 'green';
+            });
+            box[3].addEventListener('mouseover', function(){
+                this.style.backgroundColor = 'orange';
+            });
+            box[4].addEventListener('mouseout', function(){
+                this.style.backgroundColor = 'yellow';
+            });
+            box[5].addEventListener('mouseover', function(){
+                this.style.backgroundColor = 'red';
+            });
+            box[5].addEventListener('mouseout', function(){
+                this.style.backgroundColor = 'blue';
+            });
+            box[6].addEventListener('mousemove', function(){
+                console.log('mousemove!');
+            });
+
+            const inputUser = document.getElementsByName('user')[0];
+            const inputName = document.getElementsByName('name')[0];
+            const result = document.getElementsByClassName('reslut');
+
+            inputUser.addEventListener('keydown', function(){
+                console.log('keydown...');
+                let value = this.value;
+                result[0].innerText = value;
+            });
+            inputName.addEventListener('keyup', function(){
+                console.log('keyup...');
+            let value = this.value;
+            result[1].innerText = value;
+            });
+ 
+
+        };
+
+    </script>
+
+</head>
+<body>
+    <h3>2.이벤트 종류</h3>
+
+    <h4>문서 이벤트</h4>
+    <div id="content1">
+        <p>
+            가로 : <span>0</span><br>
+            세로 : <span>0</span><br>
+        </p>
+        <p>
+            위치 : <span>0</span><br>
+            <button id="btnTop">상단이동</button>
+        </p>
+    </div>
+
+    <h4>마우스 이벤트</h4>
+    <div id="content2">
+        <div class="box box1">click</div>
+        <div class="box box2">mousedown</div>
+        <div class="box box3">mouseup</div>
+        <div class="box box4">mouseover</div>
+        <div class="box box5">mouseout</div>
+        <div class="box box6">hover</div>
+        <div class="box box7">mouseomve</div>
+    </div>
+
+    <h4>키보드 이벤트</h4>
+    <div id="content3">
+        <p>
+            <input type="text" name="user">
+            <span class="result"></span>
+        </p>
+        <p>
+            <input type="text" name="name">
+            <span class="result"></span>
+        </p>
+    </div>
+
+    <h4>폼 이벤트</h4>
+    <div id="content4">
+        <form action="#">
+            <p>
+                <input type="text" name="uid">
+                <span class="print"></span>
+            </p>
+            <p>
+                <input type="text" name="pass">
+                <span class="print"></span>
+            </p>
+            <p>
+                <select name="" id="">
+                    <option>서울</option>
+                    <option>대전</option>
+                    <option>대구</option>
+                    <option>부산</option>
+                    <option>광주</option>
+                </select>
+                <span class="print"></span>
+            </p>
+            <input type="submit" value="전송">
+        </form>
+    </div>
+    
+</body>
+</html>
+
+<script>
+    console.log('here3...');
+</script>
