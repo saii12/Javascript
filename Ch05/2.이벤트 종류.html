@@ -96,9 +96,9 @@
         const selectAddr = document.getElementsByName('addr')[0];
         const print = document.getElementsByClassName('print');
 
-        inputUid.addEventListener('focus', function(){
+        inputUid.addEventListener('focus', function(){ //focus는 커서 이벤트, 즉 커서가 생기면 ~ 실행한다
             console.log('focus!');
-            print[0].innerText = 'focus!';
+            print[0].innerText = 'focus!'; //focus! 텍스트 입력
         });
 
         inputPass.addEventListener('focusout', function(){
@@ -126,10 +126,10 @@
         let w = this.innerWidth; //this는 onresize의 주체, 즉 window
         let h = this.innerHeight;
 
-        const content1 = document.getElementById('content1');
-        const span = content1.getElementsByTagName('span');
+        const content1 = document.getElementById('content1'); 
+        const span = content1.getElementsByTagName('span'); //content1 객체에서 span, 배열로 원소 3개 나오겠네
 
-        span[0].innerText = w; //w객체가 텍스트로 나타남
+        span[0].innerText = w; //pnresize 이벤트가 일어날 때 w객체가 텍스트로 나타남
         span[1].innerText = h;
     };
 
@@ -137,13 +137,13 @@
     window.onscroll = function() {
         console.log('scroll!');
 
-        let top = this.scrollY;
+        let top = this.scrollY; //스크롤의 y값이 top 객체로
 
         const content1 = document.getElementById('content1');
         const span = content1.getElementsByTagName('span');
         span[2].innerText = top;
 
-    }
+    };
 
 
     </script>
@@ -200,7 +200,7 @@
                 <span class="print"></span>
             </p>
             <p>
-                <select name="" id="">
+                <select name="addr">
                     <option>서울</option>
                     <option>대전</option>
                     <option>대구</option>
