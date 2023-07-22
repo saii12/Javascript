@@ -77,8 +77,58 @@
             let value = this.value;
             result[1].innerText = value;
             });
- 
 
+            // 폼이벤트
+            const form = document.querySelector('#content4 > form');
+            const inputUid = document.getElementsByName('uid')[0];
+            const inputPass = document.getElementsByName('pass')[0];
+            const selectAddr = document.getElementsByName('addr')[0];
+            const print = document.getElementsByClassName('print');
+
+            inputUid.addEventListener('focus', function(){
+                console.log('focus!');
+                print[0].innerText = 'focus!';
+            });
+            inputPass.addEventListener('focusout', function(){
+                console.log('focusout!');
+                print[1].innerText = 'focusout!';
+            });
+            selectAddr.addEventListener('change', function(){
+                console.log('change');
+                print[2].innerText = 'change';
+            });
+
+            form.addEventListener('submit', function(){
+                console.log('submit!');
+                alert('전송시작');
+            })
+ 
+            // onload end
+
+            // 문서 리사이즈 이벤트
+            window.onresize = function(){
+                console.log('resize');
+
+                let w = this.innerWidth;
+                let h = this.innerHeight;
+
+                const content1 = document.getElementById('content1');
+                const span = content1.getElementsByTagName('span');
+
+                span[0].innerText = w;
+                span[1].innerText = h;
+            };
+
+            //문서 스크롤 이벤트
+            window.onscroll = function(){
+                console.log('scroll!');
+
+                let top = this.scrollY;
+
+                const content1 = document.getElementById('content1');
+                const span = content1.getElementsByTagName('span');
+                span[2].innerText = top;
+            }
         };
 
     </script>
@@ -134,7 +184,7 @@
                 <span class="print"></span>
             </p>
             <p>
-                <select name="" id="">
+                <select name="addr">
                     <option>서울</option>
                     <option>대전</option>
                     <option>대구</option>
