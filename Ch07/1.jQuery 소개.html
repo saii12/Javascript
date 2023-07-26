@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.jQuery 소개</title>
+    <!--
+        날짜 : 2023/07/26
+        이름 : 박한산
+        내용 : 자바스크립트 jQuery 실습하기
+    -->
+    <script src="./js/jquery-3.7.0.min.js"></script> <!-- 이 라이브러리 안에 있는 함수를 사용할 수 있게 됨-->
+    <script>
+        // Javascript 처리
+        window.onload = function(){ // 순수자바스크립트(바닐라스크립트)
+            const city = document.getElementById('city');
+            const li = city.getElementsByTagName('li');
+            li[0].style.color = 'red';
+        }
+        
+        // jQuery 처리
+        $(document).ready(function(){ // $=jQuery 편의상 $로 사용 /  문서객체가 준비되면, 즉 window.onload와 같은 의미
+            
+           const li = $('#city > li:last-child').css('color', 'green');
+
+
+
+        }); 
+
+    </script>
+</head>
+<body>
+    <h3>1.jQuery 소개</h3>
+
+    <ul id="city">
+        <li>서울</li>
+        <li>대전</li>
+        <li>대구</li>
+        <li>부산</li>
+        <li>광주</li>
+    </ul>
+</body>
+</html>
