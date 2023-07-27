@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.jQuery 조작함수</title>
+     <!--
+        날짜 : 2023/07/27
+        이름 : 박한산
+        내용 : jQuery 조작함수 실습하기
+    -->
+    <style>
+        .box { /*box1 box2 클래스는 적용안됨*/
+            display: inline-block; 
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+
+        .red {background-color: red;}
+        .blue {background-color: blue;}
+        .green {background-color: green;}
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    
+    <script>
+        $(function(){ //$(document).ready(function(){}) 을 축약한 것
+
+            // attr() - 속성함수
+            $('img').eq(0).attr('src', './images/flower1.jpg').attr('alt', '벚꽃'); 
+            $('img').eq(1).attr({ 
+                'src':'./images/flower2.jpg', // JSON {}빠트리지 않기
+                'alt':'코스모스'
+            });
+            
+            // css() - 스타일 조작함수
+            $('.box1')
+            .css('width', '100px')
+            .css('height', '100px')
+            .css('border', '1px solid black')
+            .css('background', 'orange');
+
+            $('.box2').css({
+                'width':'100px', 
+                'height':'100px', 
+                'border':'1px solid black', 
+                'background':'green'});
+
+            // text(), html()
+            const r1 = $('#city').text(); //innerText 텍스트만 가져오기
+            const r2 = $('#city').html(); //태그, 텍스트 전부 가져오기
+
+            $('p:eq(0)').text(r1);
+            $('p:eq(1)').text(r2); // 태그까지 텍스트로 표현
+            $('p:eq(2)').html(r1);
+            $('p:eq(3)').html(r2); // 태그,텍스트 html로 표현 
+
+            // 추가/이동 함수
+            const city = $('.city');
+            city.append('<li><em>제주도</em></li>'); //javascript에서 inserthtml append는 맨뒤에 추가
+            city.prepend('<li><em>서울특별시</em></li>'); //prepend는 맨앞에 추가
+
+            city.find('.gs > li:eq(1)').appendTo('.city > li:eq(1) > ol'); //서울특별시 추가되서 li:eq(1)이 경기도됨
+            city.find('.gs > li:eq(1)').appendTo('.city > li:eq(5) > ol');    
+            city.find('.gs > li:eq(1)').appendTo('.city > li:eq(2) > ol');    
+            city.find('.gs > li:eq(1)').appendTo('.city > li:eq(3) > ol');    
+            city.find('.gs > li:eq(1)').prependTo('.city > li:eq(1) > ol');    
+           
+            // 클래스 함수
+            $('.box').eq(0).addClass('red'); // 클래스 이름에 red 추가
+            $('.box').eq(1).removeClass('green'); // 클래스 이름에 있던 green 삭제
+            $('.box').eq(2).toggleClass('blue'); // 해당 클래스에 blue가 없으면 addClass, 있으면 removeClass 효과
+        }); 
+
+    </script>
+</head>
+<body>
+    <h3>2.jQuery 조작함수</h3>
+
+    <h4>attr 함수</h4>
+    <img src="" alt="">
+    <img src="" alt="">
+
+    <h4>css 함수</h4>
+    <div class="box1">box1</div>
+    <div class="box2">box2</div>
+
+    <h4>text/html 함수</h4>
+    <ul id="city">
+        <li>서울</li>
+        <li>대전</li>
+        <li>대구</li>
+        <li>부산</li>
+        <li>광주</li>
+    </ul>
+
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+
+    <h4>추가/이동 함수</h4>
+    <ul class="city">
+        <li><em>경기도</em><ol></ol></li>
+        <li><em>충청도</em><ol></ol></li>
+        <li><em>강원도</em><ol></ol></li>
+        <li>
+            <em>경상도</em>
+            <ol class="gs">
+                <li>창원</li>
+                <li>수원</li>
+                <li>목포</li>
+                <li>부여</li>
+                <li>원주</li>
+                <li>파주</li>
+            </ol>
+        </li>
+        <li><em>전라도</em><ol></ol></li>
+    </ul>
+
+
+    <h4>class 함수</h4>
+    <div class="box">box1</div>
+    <div class="box green">box2</div>
+    <div class="box">box3</div>
+</body>
+</html>

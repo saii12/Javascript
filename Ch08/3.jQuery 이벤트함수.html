@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.jQuery 이벤트함수</title>
+    <!--
+        날짜 : 2023/07/27  
+        이름 : 박한산
+        내용 : jQuery 이벤트함수 실습하기
+    -->
+    <style>
+        html {
+            width: 100%;
+            height: 2000px; /*스크롤은 높이 500, 제일 밑으로 내리면 위치는 1500가리킴(높이 2000이고 스크롤 크기 500이므로 더이상 내릴 수  없음)*/
+        }
+
+        .box {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+
+        p:nth-of-type(2) { 
+            position: fixed;
+            right: 0;
+            top: 10px;
+        }
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <script>
+        $(function(){
+
+            $('.box1').click(function(){ //javascript함수 아님, jquery함수임
+                $(this).css('background', 'red');
+            }); 
+
+            $('.box2').mousedown(function(){ 
+                $(this).css('background', 'green');
+            });
+
+            $('.box3').mouseup(function(){
+                $(this).css('background', 'blue');
+            })
+
+            $('.box4').mouseover(function(){
+                $(this).css('background', 'orange');
+            })
+
+            $('.box5').mouseout(function(){
+                $(this).css('background', 'yellow');
+            })
+
+            $('.box6').mousemove(function(){
+                console.log('mousemove!!!');
+            })
+
+            $('p:eq(1) > button').click(function(){
+                $(window).scrollTop(0);
+            })
+        }); //ready함수 : 문서준비가 됐을때
+
+        $(window).resize(function(){ //resize랑 scroll은 window객체 이용 / $(function(){}) 안에 없는데 어떻게 p 태그 가리키지??
+
+            let w = $(this).width();
+            let h = $(this).height();
+
+            $('p:eq(0) > span:eq(0)').text(w); //nth-child는 css에서 쓰고, jQuery에서는 eq()
+            $('p:eq(0) > span:eq(1)').text(h);
+        });
+
+        $(window).scroll(function(){
+            let top = $(this).scrollTop(); //scrollTop : 스크롤 위치 가리킴
+            $('p:eq(1) > span').text(top);
+        });
+
+    </script>
+</head>
+<body>
+    <h3>3.jQuery 이벤트함수</h3>
+
+    <h4>마우스이벤트</h4>
+    <div class="box box1">click</div>
+    <div class="box box2">mousedown</div>
+    <div class="box box3">mouseup</div>
+    <div class="box box4">mouseover</div>
+    <div class="box box5">mouseout</div>
+    <div class="box box6">mousemove</div>
+
+
+    <h4>브라우저 이벤트</h4>
+    <p>
+        가로 : <span>0</span><br>
+        세로 : <span>0</span><br>
+    </p>
+
+    <p>
+        위치 : <span>0</span><br>
+        <button>상단이동</button>
+    </p>
+</body>
+</html>
