@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36ecd1247e52ef2636b888a0efd37734"></script>
+    <script>
+        $(function(){
+
+            var mapContainer = document.getElementById('map1'), // 지도를 표시할 div 
+            mapOption = { 
+                center: new kakao.maps.LatLng(35.13713951715803, 129.09887723598874), // 지도의 중심좌표(위도, 경도)
+                level: 3 // 지도의 확대 레벨
+            };
+        
+            // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+            var map = new kakao.maps.Map(mapContainer, mapOption);
+
+            $.ajax({
+                url:'https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=Test&serviceKey=fT71tdIWiD0YQDkBA%2FP2p%2BPuSDQWJF6Q9wjn5Zgh8dnrRdYf7SPenmhj9E1sIr3kCs%2FL4qj4E91xfxqsb8Rfbw%3D%3D&_type=json',
+                type:'GET',
+                dataType:'json',
+                success:function(data){
+                    console.log(data.response.body.items.item);
+                    const items = data.response.body.items.item;
+
+                    for(let item of items){
+                        console.log(item.facltNm);
+
+                        var marker = new kakao.maps.Marker({
+                            map: map, // 마커를 표시할 지도
+                            position: new kakao.maps.LatLng(item.mapY, item.mapX), // 마커를 표시할 위치
+                            title: item.facltNm // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                        });
+
+                        marker.setMap(map);
+                    }
+                }
+
+            })
+
+        }); // onready end
+    </script>
+</head>
+<body>
+    <h3>2.공공데이터 활용 실습</h3>
+
+    <h4>전국 캠핑장</h4>
+    <div id="map1" style="width:1200px;height:800px;"></div>
+    
+</body>
+</html>
